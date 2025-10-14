@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patología y Clínica Porcina - Visualizador PDF</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+      <div class="header-buttons">
+          <button class="header-toggle" id="minimizeSidebarBtn" title="Mostrar/Ocultar Sidebar">☰</button>
+          <button class="header-toggle" id="minimizePDFBtn" title="Minimizar PDF">📄</button>
+          <button class="header-toggle" id="minimizeNotesBtn" title="Minimizar Notas">📝</button>
+      </div>
+
+    <h1>📚 Patología y Clínica Equina</h1>
+  </div>
+
+  <div class="container" id="appContainer">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span>📋 Unidades de Estudio</span>
+        <button class="collapse-btn" id="collapseBtn" title="Ocultar Sidebar">×</button>
+      </div>
+
+      <div class="unit-selector">
+          <select id="unitSelect">
+              <option value="">Seleccionar Clase...</option>
+              <option value="clase01">Clase 01 - Presentación clase 1</option>
+              <option value="clase02">Clase 02 - Exploración Física del Paciente</option>
+              <option value="clase03">Clase 03 - Anemia Infecciosa Equina</option>
+              <option value="clase04">Clase 04 - Influenza Equina / Hemorragia pulmonar / Edema, enfisema y asma equina</option>
+              <option value="clase05">Clase 05 - Leptospirosis equina</option>
+              <option value="clase06">Clase 06 - Afecciones del aparato genitourinario</option>
+              <option value="clase07">Clase 07 - Piroplasmosis / Tripanosomiasis equina</option>
+              <option value="clase08">Clase 08 - Uveitis Recurrente Equina</option>
+              <option value="clase09">Clase 09 - Poliartritis de los potrillos / septicemia neonatal</option>
+              <option value="clase10">Clase 10 - Tétanos</option>
+              <option value="clase11">Clase 11 - Azoturia y Envaradura</option>
+              <option value="clase16">Clase 16 - Repaso de clases prácticas</option>
+              <option value="clase17">Clase 17 - Cólico Equino / Síndrome ulcerativo gástrico / Enfermedades del Aparato Digestivo</option>
+              <option value="clase18">Clase 18 - Encefalomielitis equina / Parasitosis gastrointestinal / Afecciones del Casco / Enfermedad del músculo blanco</option>
+              <option value="clase20">Clase 20 - Tendinitis y Desmitis</option>
+              <option value="clase21">Clase 21 - Desvasado y colocación de herraduras</option>
+          </select>
+      </div>
+
+      <div class="file-list" id="fileList">
+        <div style="padding: 2rem; text-align: center; color: #718096;">
+          Selecciona una unidad para ver los archivos
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div id="dragOverlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none;cursor:ew-resize;"></div>
+      <div class="pdf-section">
+        <div class="pdf-header">
+          <div class="pdf-title" id="pdfTitle">Sin archivo seleccionado</div>
+          <div class="pdf-controls">
+            <button class="btn btn-primary" id="openBtn" disabled>🔗 Abrir en nueva pestaña</button>
+          </div>
+        </div>
+
+        <div class="pdf-viewer" id="pdfViewer">
+          <div class="no-pdf-message">
+            <i>📄</i>
+            <div>Selecciona un archivo PDF para visualizar</div>
+          </div>
+        </div>
+      </div>
+      <div class="resizer" id="resizer"></div>
+      <div class="notes-section">
+        <div class="notes-header">
+          <div>📝 Mis Notas</div>
+          <div class="save-indicator" id="saveIndicator">✓ Guardado</div>
+        </div>
+
+        <div class="notes-tabs">
+          <div class="tab active" data-tab="toc">Tabla de Contenidos</div>
+          <div class="tab" data-tab="mentalmap">Mapa mental</div>
+          <div class="tab" data-tab="glossary">Glosario</div>
+          <div class="tab" data-tab="notes">Notas personales</div>
+        </div>
+        <div class="tab-content active" id="toc-tab"></div>
+        <div class="tab-content" id="mentalmap-tab"></div>
+        <div class="tab-content" id="glossary-tab"></div>
+        <div class="tab-content" id="notes-tab">
+            <div class="notes-toolbar-container">
+                <div class="notes-toolbar">
+                    <!-- Headings -->
+                    <button type="button" class="format-btn" data-cmd="formatBlock" data-tag="P">P</button>
+                    <button type="button" class="format-btn" data-cmd="formatBlock" data-tag="H1">H1</button>
+                    <button type="button" class="format-btn" data-cmd="formatBlock" data-tag="H2">H2</button>
+                    <button type="button" class="format-btn" data-cmd="formatBlock" data-tag="H3">H3</button>
+                    <!-- Bold/Italic/Underline/Highlight -->
+                    <button type="button" class="format-btn" data-cmd="bold"><b>B</b></button>
+                    <button type="button" class="format-btn" data-cmd="italic"><i>I</i></button>
+                    <button type="button" class="format-btn" data-cmd="underline"><u>U</u></button>
+                    <button type="button" class="format-btn" id="clearFormatBtn" style="font-weight:bold;">⎚</button>
+                </div>
+                <div class="notes-toolbar notes-toolbar-row2">
+                    <!-- ForeColor (text color) buttons -->
+                    <button type="button" class="format-btn" data-cmd="backColor" data-color="#fffd87" style="background:#fffd87;">A</button>
+                    <button type="button" class="format-btn" data-cmd="backColor" data-color="#ace5ff" style="background:#ace5ff;">A</button>
+                    <button type="button" class="format-btn" data-cmd="foreColor" data-color="#F25F5C" style="color:#F25F5C;">●</button>
+                    <button type="button" class="format-btn" data-cmd="foreColor" data-color="#2471A3" style="color:#2471A3;">●</button>
+                    <button type="button" class="format-btn" data-cmd="foreColor" data-color="#159A76" style="color:#159A76;">●</button>
+                    <button type="button" class="format-btn" data-cmd="foreColor" data-color="#9D3FEA" style="color:#9D3FEA;">●</button>
+                    <button type="button" class="format-btn" data-cmd="foreColor" data-color="#D96E30" style="color:#D96E30;">●</button>
+                </div>
+            </div>
+            <div class="personal-notes" id="notesEditorContainer">
+                <div id="notesEditor" contenteditable="true" spellcheck="true"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

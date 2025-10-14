@@ -1,0 +1,12 @@
+{
+  "name": "pdf-visualizer",
+  "version": "1.0.0",
+  "description": "Patología y Clínica Porcina - Visualizador PDF",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
