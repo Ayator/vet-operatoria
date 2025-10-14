@@ -1,63 +1,37 @@
 // ---- File structure mapping by unit ----
 const fileStructure = {
-    clase01: [
-        "Presentación clase 1"
+    "01 Intervenciones del aparato reproductor de la hembra": [
+        "CIRUGIA DEL APARATO REPRODUCTOR FEMENINO",
+        "OPERACIONES EN EL APARATO REPRODUCTOR HEMBRA"
     ],
-    clase02: [
-        "Clase 2 - Exploración Física del Paciente"
+    "02 Cirugías del globo ocular": [
+        "CIRUGÍAS DEL GLOBO OCULAR GRANDES ANIMALES",
+        "Globo Ocular Pequeños Animales",
+        "Globo Ocular Word"
     ],
-    clase03: [
-        "Presentación clase 3 - Anemia Infecciosa Equina"
+    "03 Cirugías del conducto auditivo y pabellón auricular": [
+        "Cirugia sobre el pabellon auricular",
+        "Descorne"
     ],
-    clase04: [
-        "Presentación clase n° 4 - Influenza Equina",
-        "Presentación clase - Hemorragia pulmonar inducida por ejercicio",
-        "Congestión, edema, enfisema pulmonar y asma equina"
+    "04 Cirugías del cuello y tráquea": [
+        "ESOFAGOTOMÍA",
+        "Esofagotomía",
+        "Laringotomía",
+        "Operaciones en Laringe y Traquea",
+        "Traqueotomia"
     ],
-    clase05: [
-        "Presentación clase 5 - Leptospirosis equina"
+    "05 Cirugías de la ubre y cadena mamaria": [
+        "INTERV_1",
+        "Mastectomía",
+        "PROCED_1"
     ],
-    clase06: [
-        "Afecciones del aparato genitourinario"
-    ],
-    clase07: [
-        "Presentación Clase 7 - Piroplasmosis equina",
-        "Presentación clase 7 - Tripanosomiasis equina"
-    ],
-    clase08: [
-        "Presentación clase 8 - Uveitis Recurrente Equina"
-    ],
-    clase09: [
-        "Presentación clase 9 - Poliartritis de los potrillos septicemia neonatal"
-    ],
-    clase10: [
-        "Presentación clase Nro. 10 - Tétanos"
-    ],
-    clase11: [
-        "Presentación clase 11 - Azoturia y Envaradura"
-    ],
-    clase16: [
-        "Presentación clase 16 - Repaso de clases prácticas"
-    ],
-    clase17: [
-        "Cólico Equino",
-        "Síndrome ulcerativo gástrico equino",
-        "Enfermedades del Aparato Digestivo"
-    ],
-    clase18: [
-        "Presentación Clase 18 - Encefalomielitis equina",
-        "Presentación clase 18 - Parasitosis gastrointestinal del equino",
-        "Presentación clase 18 - Afecciones del Casco",
-        "Presentación Enfermedad del músculo blanco en equinos"
-    ],
-    clase20: [
-        "Clase Nro. 20 - Tendinitis y Desmitis"
-    ],
-    clase21: [
-        "Presentación clase 21 - Desvasado y colocación de herraduras"
+    "06 Cirugías del aparato reproductor macho y uretra": [
+        "MATERIAL DE LECTURA Toros retajos",
+        "MATERIAL DE LECTURA Postectomia",
+        "Material de lectura Orquidectomia",
+        "Trabajo de investigación sobre toros retajos"
     ]
 };
-
 
 let currentFile = null;
 let currentUnit = null;
@@ -117,8 +91,8 @@ function loadUnit() {
     return;
   }
   currentUnit = selectedUnit;
-  console.log();
   const files = fileStructure[selectedUnit] || [];
+    console.log(fileStructure[selectedUnit]);
   fileList.innerHTML = '';
   files.forEach(file => {
     const fileItem = document.createElement('div');
